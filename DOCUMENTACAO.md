@@ -449,6 +449,30 @@ module.exports = {
 
 ---
 
+## 📝 **Histórico de Alterações**
+
+### 🗓️ **Versão 2.3 - Dezembro 2024**
+**Remoção do Header de Navegação**
+
+#### ✅ **Alterações Implementadas:**
+- **Removido header completo**: Eliminado todo o cabeçalho de navegação fixo
+- **Removido menu desktop**: Links de navegação (Início, Serviços, Frotas, Sobre nós, Depoimentos, Segurança, Orçamento, Contato)
+- **Removido menu mobile**: Overlay do menu mobile com todos os links e opções de contato rápido
+- **Ajustado layout principal**: Removido padding-top da tag `<main>` que compensava o header fixo
+- **Simplificado layout.tsx**: Código mais limpo e focado no conteúdo principal
+
+#### 🎯 **Benefícios:**
+- **Experiência mais limpa**: Foco total no conteúdo da página
+- **Maior espaço visual**: Aproveitamento completo da tela
+- **Navegação simplificada**: Usuário navega pelo scroll natural da página
+- **Performance melhorada**: Menos elementos DOM e CSS
+- **Mobile-friendly**: Melhor experiência em dispositivos móveis
+
+#### 📁 **Arquivos Modificados:**
+- `src/app/layout.tsx`: Remoção completa do header e menu mobile
+
+---
+
 ## 🎯 **Próximas Melhorias Sugeridas**
 
 ### 🔮 **Funcionalidades Futuras**
@@ -481,4 +505,4 @@ module.exports = {
 
 ---
 
-**📞 Para dúvidas ou suporte técnico, entre em contato!** 
+**📞 Para dúvidas ou suporte técnico, entre em contato!**
