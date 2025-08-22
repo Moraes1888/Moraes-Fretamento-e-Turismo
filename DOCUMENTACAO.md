@@ -378,6 +378,12 @@ module.exports = {
 
 ## 📝 Changelog
 
+### 🆕 **v2.4.0 - Ajustes Finais e Correções**
+- ✅ **Link do Instagram corrigido** para o perfil correto.
+- ✅ **Endereço atualizado** para Votorantim, SP.
+- ✅ **Contraste do seletor de serviços melhorado** para maior legibilidade.
+- ✅ **Corrigido problema de z-index** no seletor de serviços, garantindo que ele apareça na frente de outros elementos.
+
 ### 🆕 **v2.3.0 - Correção Ortográfica e Finalização**
 - ✅ **'Traslado' → 'Translado'** corrigido em todo o site
 - ✅ **Formulário atualizado** com ortografia correta

@@ -18,8 +18,9 @@ import {
 export default function Home() {
   const [formData, setFormData] = React.useState({
     nome: '',
-    telefone: '',
-    email: '',
+    dataHora: '',
+    localEmbarque: '',
+    destino: '',
     servico: '',
     mensagem: ''
   });
@@ -36,15 +37,21 @@ export default function Home() {
   const [galleryImages, setGalleryImages] = React.useState([
     {
       id: 1,
-      url: "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?ixlib=rb-4.0.3&auto=format&fit=crop&w=2069&q=80",
-      title: "Frota Executiva",
-      description: "Veículos de luxo para transporte corporativo"
+      url: "/img/praia.jpg",
+      title: "Litoral Paulista",
+      description: "Relaxe nas mais belas praias de São Paulo"
     },
     {
       id: 2,
-      url: "https://images.unsplash.com/photo-1570125909232-eb263c188f7e?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80",
-      title: "Chapada Diamantina",
-      description: "Aventura inesquecível na natureza"
+      url: "/img/turismo-religioso.jpg",
+      title: "Turismo Religioso em SP",
+      description: "Conheça os principais templos e igrejas de SP"
+    },
+    {
+      id: 3,
+      url: "/img/montanhismo.jpg",
+      title: "Montanhismo em SP",
+      description: "Aventure-se pelas serras e montanhas paulistas"
     }
   ]);
   const [currentImageIndex, setCurrentImageIndex] = React.useState(0);
@@ -58,46 +65,25 @@ export default function Home() {
   
   const destinations = [
     {
-      name: "Frota Executiva",
-      description: "Veículos de luxo para transporte corporativo",
-      image: "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?ixlib=rb-4.0.3&auto=format&fit=crop&w=2069&q=80",
-      price: "Sob consulta",
-      features: ["Ar condicionado", "Wi-Fi", "Poltronas reclináveis", "Sistema de som"]
+      name: "Praias Paulistas",
+      description: "Relaxe nas mais belas praias de São Paulo",
+      image: "/img/praia.jpg",
+      price: "A partir de R$ 800",
+      features: ["Transporte em van executiva", "Guia local", "Seguro viagem", "Hospedagem opcional"]
     },
     {
-      name: "Chapada Diamantina",
-      description: "Aventura inesquecível na natureza",
-      image: "https://images.unsplash.com/photo-1570125909232-eb263c188f7e?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80",
-      price: "A partir de R$ 2.500",
-      features: ["Guia especializado", "Seguro viagem", "Hospedagem", "Alimentação"]
+      name: "Montanhismo em SP",
+      description: "Aventure-se pelas serras e montanhas paulistas",
+      image: "/img/montanhismo.jpg",
+      price: "A partir de R$ 950",
+      features: ["Transporte 4x4", "Equipamentos de segurança", "Guia especializado", "Alimentação inclusa"]
     },
     {
-      name: "Morro de São Paulo",
-      description: "Paraíso tropical na Bahia",
-      image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80",
-      price: "A partir de R$ 1.800",
-      features: ["Transfer incluído", "Passeios opcionais", "Hospedagem", "Café da manhã"]
-    },
-    {
-      name: "Ônibus de Turismo",
-      description: "Conforto e segurança para grupos",
-      image: "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?ixlib=rb-4.0.3&auto=format&fit=crop&w=2069&q=80",
-      price: "Sob consulta",
-      features: ["Capacidade para 44 passageiros", "Banheiro", "Frigobar", "TV/DVD"]
-    },
-    {
-      name: "Eventos Corporativos",
-      description: "Transporte especializado para empresas",
-      image: "https://images.unsplash.com/photo-1511578314322-379afb476865?ixlib=rb-4.0.3&auto=format&fit=crop&w=2069&q=80",
-      price: "Sob consulta",
-      features: ["Pontualidade garantida", "Motoristas uniformizados", "Veículos executivos", "Suporte 24h"]
-    },
-    {
-      name: "Praia do Forte",
-      description: "Belezas naturais e história",
-      image: "https://images.unsplash.com/photo-1559827260-dc66d52bef19?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80",
-      price: "A partir de R$ 2.200",
-      features: ["Projeto Tamar", "Vila histórica", "Praias paradisíacas", "Gastronomia local"]
+      name: "Turismo Religioso em SP",
+      description: "Conheça os principais templos e igrejas de SP",
+      image: "/img/turismo-religioso.jpg",
+      price: "A partir de R$ 700",
+      features: ["Transporte confortável", "Visitas guiadas", "Material informativo", "Flexibilidade de roteiro"]
     }
   ];
 
@@ -160,19 +146,27 @@ export default function Home() {
     setGalleryImages(galleryImages.filter(img => img.id !== id));
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setIsSubmitting(true);
-    
-    // Simular envio
-    await new Promise(resolve => setTimeout(resolve, 2000));
-    
-    // Aqui você integraria com seu backend
-    console.log('Dados do formulário:', formData);
-    
-    setIsSubmitting(false);
-    setFormData({ nome: '', telefone: '', email: '', servico: '', mensagem: '' });
-    alert('Mensagem enviada com sucesso!');
+    const subject = `Solicitação de Orçamento - ${formData.nome}`;
+    const body = `
+      Nome: ${formData.nome}
+      Data e Hora da Viagem: ${formData.dataHora}
+      Local de Embarque: ${formData.localEmbarque}
+      Destino: ${formData.destino}
+      Serviço: ${formData.servico}
+      Descrição do Serviço: ${formData.mensagem}
+    `;
+    window.location.href = `mailto:moraesfretamentoeturismo@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    alert('Para concluir, envie o e-mail que foi aberto.');
+    setFormData({
+      nome: '',
+      dataHora: '',
+      localEmbarque: '',
+      destino: '',
+      servico: '',
+      mensagem: ''
+    });
   };
 
   const handleAdminLogin = () => {
@@ -705,14 +699,14 @@ export default function Home() {
                   {
                     icon: MapPin,
                     title: "Endereço",
-                    info: "Sorocaba - SP, Brasil",
+                    info: "Votorantim, SP",
                     action: "#"
                   },
                   {
                     icon: Instagram,
                     title: "Instagram",
                     info: "@moraesfretamento",
-                    action: "https://instagram.com/moraesfretamento"
+                    action: "https://www.instagram.com/moraesfretamento/"
                   }
                 ].map((contact, index) => (
                   <Card key={index} className={`p-6 transition-all duration-500 hover:scale-105 ${
@@ -766,29 +760,38 @@ export default function Home() {
                     </div>
                     <div>
                       <Label className={vrMode ? 'text-cyan-200' : 'text-gray-700'}>
-                        Telefone *
+                        Data e Hora da Viagem
                       </Label>
                       <Input
-                        required
-                        value={formData.telefone}
-                        onChange={(e) => setFormData({...formData, telefone: e.target.value})}
+                        type="datetime-local"
+                        value={formData.dataHora}
+                        onChange={(e) => setFormData({...formData, dataHora: e.target.value})}
                         className={vrMode ? 'bg-black/50 border-cyan-500/30 text-white' : ''}
-                        placeholder="(15) 99999-9999"
                       />
                     </div>
                   </div>
                   
                   <div>
                     <Label className={vrMode ? 'text-cyan-200' : 'text-gray-700'}>
-                      Email *
+                      Local de Embarque
                     </Label>
                     <Input
-                      type="email"
-                      required
-                      value={formData.email}
-                      onChange={(e) => setFormData({...formData, email: e.target.value})}
+                      value={formData.localEmbarque}
+                      onChange={(e) => setFormData({...formData, localEmbarque: e.target.value})}
                       className={vrMode ? 'bg-black/50 border-cyan-500/30 text-white' : ''}
-                      placeholder="seu@email.com"
+                      placeholder="Digite o local de embarque"
+                    />
+                  </div>
+
+                  <div>
+                    <Label className={vrMode ? 'text-cyan-200' : 'text-gray-700'}>
+                      Destino
+                    </Label>
+                    <Input
+                      value={formData.destino}
+                      onChange={(e) => setFormData({...formData, destino: e.target.value})}
+                      className={vrMode ? 'bg-black/50 border-cyan-500/30 text-white' : ''}
+                      placeholder="Digite o destino da viagem"
                     />
                   </div>
                   
@@ -800,10 +803,10 @@ export default function Home() {
                       value={formData.servico}
                       onValueChange={(value) => setFormData({...formData, servico: value})}
                     >
-                      <SelectTrigger className={vrMode ? 'bg-black/50 border-cyan-500/30 text-white' : ''}>
+                      <SelectTrigger className={vrMode ? 'bg-black/50 border-cyan-500/30 text-white' : 'border-purple-300'}>
                         <SelectValue placeholder="Selecione o serviço" />
                       </SelectTrigger>
-                      <SelectContent>
+                      <SelectContent className={vrMode ? 'bg-black/80 text-white' : 'bg-white'}>
                         <SelectItem value="executivo">Fretamento Executivo</SelectItem>
                         <SelectItem value="turismo">Turismo</SelectItem>
                         <SelectItem value="eventos">Eventos</SelectItem>

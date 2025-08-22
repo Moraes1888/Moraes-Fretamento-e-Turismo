@@ -56,7 +56,7 @@ export default function RootLayout({
             <div className="bg-white/10 backdrop-blur-xl rounded-2xl p-6 border border-white/20">
               <span className="font-bold text-purple-300 text-lg">Redes Sociais:</span><br />
               <a href="#" className="text-purple-100 hover:text-purple-300 transition-all duration-300 hover:scale-110 mx-2 font-semibold">Whatsapp</a>|
-              <a href="https://www.instagram.com/moraesfretamentoeturismo/" target="_blank" rel="noopener noreferrer" className="text-purple-100 hover:text-purple-300 transition-all duration-300 hover:scale-110 mx-2 font-semibold">Instagram</a>
+              <a href="https://www.instagram.com/moraesfretamento/" target="_blank" rel="noopener noreferrer" className="text-purple-100 hover:text-purple-300 transition-all duration-300 hover:scale-110 mx-2 font-semibold">Instagram</a>
             </div>
           </div>
           <div className="text-sm text-cyan-100/60 mt-4 font-light">✨ Deus seja louvado ✨</div>
