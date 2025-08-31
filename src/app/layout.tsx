@@ -7,6 +7,7 @@ import { ChevronDownIcon } from "lucide-react";
 import Image from "next/image";
 import { useState } from "react";
 import React from "react";
+import SessionProvider from "../components/SessionProvider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -41,11 +42,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-
-
-
-
-        <main>{children}</main>
+        <SessionProvider>
+          <main>{children}</main>
         <footer className="w-full bg-gradient-to-r from-slate-900 via-purple-900 to-indigo-900 backdrop-blur-xl border-t border-white/10 mt-16 py-12 px-4 flex flex-col items-center gap-6 text-center">
           <div className="flex flex-col md:flex-row gap-8 md:gap-16 items-center justify-center">
             <div className="bg-white/10 backdrop-blur-xl rounded-2xl p-6 border border-white/20">
@@ -61,6 +59,7 @@ export default function RootLayout({
           </div>
           <div className="text-sm text-cyan-100/60 mt-4 font-light">✨ Deus seja louvado ✨</div>
         </footer>
+        </SessionProvider>
       </body>
     </html>
   );

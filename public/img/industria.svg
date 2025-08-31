@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="400" height="300">
+  <!-- Sky background -->
+  <rect width="400" height="300" fill="#87CEEB"/>
+  
+  <!-- Ground -->
+  <rect x="0" y="250" width="400" height="50" fill="#228B22"/>
+  
+  <!-- Main factory building -->
+  <rect x="50" y="150" width="120" height="100" fill="#696969" stroke="#2F4F4F" stroke-width="2"/>
+  
+  <!-- Factory roof -->
+  <polygon points="50,150 110,120 170,150" fill="#2F4F4F"/>
+  
+  <!-- Windows on main building -->
+  <rect x="70" y="170" width="15" height="15" fill="#FFD700"/>
+  <rect x="100" y="170" width="15" height="15" fill="#FFD700"/>
+  <rect x="130" y="170" width="15" height="15" fill="#FFD700"/>
+  <rect x="70" y="200" width="15" height="15" fill="#FFD700"/>
+  <rect x="100" y="200" width="15" height="15" fill="#FFD700"/>
+  <rect x="130" y="200" width="15" height="15" fill="#FFD700"/>
+  
+  <!-- Secondary building -->
+  <rect x="180" y="180" width="80" height="70" fill="#708090" stroke="#2F4F4F" stroke-width="2"/>
+  
+  <!-- Secondary building roof -->
+  <rect x="175" y="175" width="90" height="10" fill="#2F4F4F"/>
+  
+  <!-- Windows on secondary building -->
+  <rect x="190" y="195" width="12" height="12" fill="#FFD700"/>
+  <rect x="210" y="195" width="12" height="12" fill="#FFD700"/>
+  <rect x="230" y="195" width="12" height="12" fill="#FFD700"/>
+  <rect x="190" y="220" width="12" height="12" fill="#FFD700"/>
+  <rect x="210" y="220" width="12" height="12" fill="#FFD700"/>
+  <rect x="230" y="220" width="12" height="12" fill="#FFD700"/>
+  
+  <!-- Smokestacks -->
+  <rect x="280" y="80" width="20" height="170" fill="#A0A0A0" stroke="#2F4F4F" stroke-width="2"/>
+  <rect x="320" y="60" width="25" height="190" fill="#A0A0A0" stroke="#2F4F4F" stroke-width="2"/>
+  <rect x="360" y="90" width="18" height="160" fill="#A0A0A0" stroke="#2F4F4F" stroke-width="2"/>
+  
+  <!-- Smoke from smokestacks -->
+  <ellipse cx="290" cy="70" rx="15" ry="8" fill="#D3D3D3" opacity="0.7"/>
+  <ellipse cx="285" cy="55" rx="20" ry="10" fill="#D3D3D3" opacity="0.6"/>
+  <ellipse cx="295" cy="40" rx="25" ry="12" fill="#D3D3D3" opacity="0.5"/>
+  
+  <ellipse cx="332" cy="50" rx="18" ry="9" fill="#D3D3D3" opacity="0.7"/>
+  <ellipse cx="327" cy="35" rx="23" ry="11" fill="#D3D3D3" opacity="0.6"/>
+  <ellipse cx="337" cy="20" rx="28" ry="13" fill="#D3D3D3" opacity="0.5"/>
+  
+  <ellipse cx="369" cy="80" rx="12" ry="6" fill="#D3D3D3" opacity="0.7"/>
+  <ellipse cx="365" cy="68" rx="16" ry="8" fill="#D3D3D3" opacity="0.6"/>
+  <ellipse cx="372" cy="55" rx="20" ry="10" fill="#D3D3D3" opacity="0.5"/>
+  
+  <!-- Loading dock -->
+  <rect x="20" y="220" width="40" height="30" fill="#8B4513" stroke="#654321" stroke-width="2"/>
+  
+  <!-- Truck at loading dock -->
+  <rect x="5" y="230" width="25" height="15" fill="#FF4500"/>
+  <circle cx="10" cy="248" r="4" fill="#2F4F4F"/>
+  <circle cx="25" cy="248" r="4" fill="#2F4F4F"/>
+  
+  <!-- Factory entrance -->
+  <rect x="90" y="220" width="20" height="30" fill="#8B4513"/>
+  <rect x="95" y="225" width="10" height="20" fill="#654321"/>
+  
+  <!-- Conveyor belt -->
+  <rect x="170" y="240" width="60" height="5" fill="#2F4F4F"/>
+  <rect x="175" y="237" width="5" height="3" fill="#FFD700"/>
+  <rect x="185" y="237" width="5" height="3" fill="#FFD700"/>
+  <rect x="195" y="237" width="5" height="3" fill="#FFD700"/>
+  <rect x="205" y="237" width="5" height="3" fill="#FFD700"/>
+  <rect x="215" y="237" width="5" height="3" fill="#FFD700"/>
+  
+  <!-- Industrial equipment -->
+  <rect x="270" y="200" width="15" height="50" fill="#4682B4"/>
+  <circle cx="277" cy="190" r="8" fill="#4682B4"/>
+  
+  <!-- Fence -->
+  <line x1="0" y1="245" x2="400" y2="245" stroke="#2F4F4F" stroke-width="3"/>
+  <line x1="10" y1="240" x2="10" y2="250" stroke="#2F4F4F" stroke-width="2"/>
+  <line x1="30" y1="240" x2="30" y2="250" stroke="#2F4F4F" stroke-width="2"/>
+  <line x1="50" y1="240" x2="50" y2="250" stroke="#2F4F4F" stroke-width="2"/>
+</svg>

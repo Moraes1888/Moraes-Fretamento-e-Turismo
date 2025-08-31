@@ -455,7 +455,108 @@ module.exports = {
 
 ---
 
+## 📧 **Sistema de Envio de E-mail**
+
+### 🎯 **Funcionalidades Implementadas**
+
+#### ✅ **API de Envio**
+- **Rota**: `/api/send-email`
+- **Método**: POST
+- **Tecnologia**: Nodemailer com Gmail SMTP
+- **Template HTML**: E-mail profissional com design responsivo
+- **Validação**: Campos obrigatórios e formato de e-mail
+- **Tratamento de erros**: Logs detalhados e respostas apropriadas
+
+#### ✅ **Formulário Atualizado**
+- **Novos campos**: E-mail e telefone do cliente
+- **Integração completa**: Conectado com API de envio
+- **Feedback visual**: Notificações toast de sucesso/erro
+- **UX melhorada**: Auto-ocultação de notificações após 5 segundos
+
+#### ✅ **Template de E-mail**
+- **Design profissional**: Layout responsivo com cores da marca
+- **Informações completas**: Dados do cliente e detalhes da viagem
+- **Reply-to inteligente**: E-mail do cliente para resposta direta
+- **Estrutura organizada**: Seções bem definidas e legíveis
+
+### 🔧 **Configuração**
+
+#### 📁 **Arquivos Principais**
+- `src/app/api/send-email/route.ts`: API de envio
+- `src/app/page.tsx`: Formulário integrado
+- `.env.local`: Variáveis de ambiente
+- `CONFIGURACAO-EMAIL.md`: Guia de configuração
+
+#### ⚙️ **Variáveis de Ambiente**
+```env
+EMAIL_USER=seu-email@gmail.com
+EMAIL_PASS=sua-senha-de-aplicativo
+EMAIL_TO=contato@moraes-fretamento.com
+```
+
+#### 🛠️ **Setup Gmail**
+1. Ativar verificação em duas etapas
+2. Gerar senha de aplicativo
+3. Configurar variáveis no `.env.local`
+4. Reiniciar servidor de desenvolvimento
+
+### 📊 **Estrutura do E-mail Enviado**
+
+#### 📋 **Conteúdo**
+- **Cabeçalho**: Logo e título "Novo Orçamento"
+- **Dados do cliente**: Nome, e-mail, telefone
+- **Detalhes da viagem**: Data, embarque, destino, serviço
+- **Mensagem**: Texto personalizado do cliente (opcional)
+- **Rodapé**: Informações da empresa e call-to-action
+
+#### 🎨 **Design**
+- **Cores da marca**: Azul (#1e40af) e gradientes
+- **Layout responsivo**: Funciona em todos os clientes de e-mail
+- **Ícones**: Emojis para melhor visualização
+- **Tipografia**: Fonte system-ui para compatibilidade
+
+### 🔍 **Solução de Problemas**
+
+#### ❌ **Erros Comuns**
+- **Authentication failed**: Verificar senha de aplicativo
+- **Invalid login**: Confirmar e-mail e credenciais
+- **E-mail não chega**: Verificar pasta de spam
+
+#### 📖 **Documentação Adicional**
+- Consulte `CONFIGURACAO-EMAIL.md` para guia completo
+- Instruções passo a passo para diferentes provedores
+- Alternativas ao Gmail (Outlook, Yahoo, SMTP customizado)
+
+---
+
 ## 📝 **Histórico de Alterações**
+
+### 🗓️ **Versão 2.4 - Janeiro 2025**
+**Sistema de Envio de E-mail Implementado**
+
+#### ✅ **Funcionalidades Adicionadas:**
+- **API de envio de e-mail**: Rota `/api/send-email` com Nodemailer
+- **Formulário atualizado**: Campos de e-mail e telefone adicionados
+- **Template profissional**: E-mail HTML responsivo com design da marca
+- **Feedback visual**: Sistema de notificações toast para sucesso/erro
+- **Validação robusta**: Campos obrigatórios e formato de e-mail
+- **Tratamento de erros**: Logs detalhados e respostas apropriadas
+- **Configuração Gmail**: Suporte completo para SMTP do Gmail
+- **Documentação**: Guia completo em `CONFIGURACAO-EMAIL.md`
+
+#### 🎯 **Benefícios:**
+- **Automação completa**: Orçamentos enviados automaticamente por e-mail
+- **Experiência profissional**: Template elegante com cores da marca
+- **Facilidade de resposta**: Reply-to configurado para o cliente
+- **Configuração simples**: Variáveis de ambiente bem documentadas
+- **Suporte técnico**: Documentação detalhada para setup
+
+#### 📁 **Arquivos Criados/Modificados:**
+- `src/app/api/send-email/route.ts`: Nova API de envio
+- `src/app/page.tsx`: Formulário integrado com novos campos
+- `.env.local`: Variáveis de ambiente para e-mail
+- `CONFIGURACAO-EMAIL.md`: Guia de configuração completo
+- `DOCUMENTACAO.md`: Seção sobre sistema de e-mail
 
 ### 🗓️ **Versão 2.3 - Dezembro 2024**
 **Remoção do Header de Navegação**

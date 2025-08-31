@@ -18,6 +18,8 @@ import {
 export default function Home() {
   const [formData, setFormData] = React.useState({
     nome: '',
+    email: '',
+    telefone: '',
     dataHora: '',
     localEmbarque: '',
     destino: '',
@@ -26,6 +28,7 @@ export default function Home() {
   });
   
   const [isSubmitting, setIsSubmitting] = React.useState(false);
+  const [notification, setNotification] = React.useState<{type: 'success' | 'error', message: string} | null>(null);
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
   const [showAddImageModal, setShowAddImageModal] = React.useState(false);
   const [newImageData, setNewImageData] = React.useState({
@@ -84,6 +87,13 @@ export default function Home() {
       image: "/img/turismo-religioso.jpg",
       price: "A partir de R$ 700",
       features: ["Transporte confortável", "Visitas guiadas", "Material informativo", "Flexibilidade de roteiro"]
+    },
+    {
+      name: "Serviços de Fretamento Industrial",
+      description: "Transporte especializado para indústrias e empresas",
+      image: "/img/industria.svg",
+      price: "A partir de R$ 1.200",
+      features: ["Transporte de funcionários", "Horários flexíveis", "Veículos executivos", "Contratos personalizados"]
     }
   ];
 
@@ -128,6 +138,16 @@ export default function Home() {
     return () => clearInterval(interval);
   }, [galleryImages.length]);
 
+  // useEffect para auto-ocultar notificação
+  React.useEffect(() => {
+    if (notification) {
+      const timer = setTimeout(() => {
+        setNotification(null);
+      }, 5000); // Remove a notificação após 5 segundos
+      return () => clearTimeout(timer);
+    }
+  }, [notification]);
+
   const addNewImage = () => {
     if (newImageData.title && newImageData.url) {
       const newImage = {
@@ -146,37 +166,56 @@ export default function Home() {
     setGalleryImages(galleryImages.filter(img => img.id !== id));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const subject = `Solicitação de Orçamento - ${formData.nome}`;
-    const body = `
-      Nome: ${formData.nome}
-      Data e Hora da Viagem: ${formData.dataHora}
-      Local de Embarque: ${formData.localEmbarque}
-      Destino: ${formData.destino}
-      Serviço: ${formData.servico}
-      Descrição do Serviço: ${formData.mensagem}
-    `;
-    window.location.href = `mailto:moraesfretamentoeturismo@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-    alert('Para concluir, envie o e-mail que foi aberto.');
-    setFormData({
-      nome: '',
-      dataHora: '',
-      localEmbarque: '',
-      destino: '',
-      servico: '',
-      mensagem: ''
-    });
+    setIsSubmitting(true);
+
+    try {
+      const response = await fetch('/api/send-email', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          nome: formData.nome,
+          email: formData.email,
+          telefone: formData.telefone,
+          dataViagem: formData.dataHora,
+          localEmbarque: formData.localEmbarque,
+          destino: formData.destino,
+          servico: formData.servico,
+          mensagem: formData.mensagem
+        }),
+      });
+
+      const result = await response.json();
+
+      if (response.ok) {
+        setNotification({type: 'success', message: 'Orçamento enviado com sucesso! Entraremos em contato em breve.'});
+        setFormData({
+          nome: '',
+          email: '',
+          telefone: '',
+          dataHora: '',
+          localEmbarque: '',
+          destino: '',
+          servico: '',
+          mensagem: ''
+        });
+      } else {
+        setNotification({type: 'error', message: `Erro ao enviar orçamento: ${result.error}`});
+      }
+    } catch (error) {
+      console.error('Erro ao enviar orçamento:', error);
+      setNotification({type: 'error', message: 'Erro ao enviar orçamento. Tente novamente ou entre em contato por telefone.'});
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleAdminLogin = () => {
-    const password = prompt('Digite a senha de administrador:');
-    if (password === 'admin123') {
-      setIsLoggedIn(true);
-      alert('Login realizado com sucesso!');
-    } else {
-      alert('Senha incorreta!');
-    }
+    // Redirecionar para a área administrativa
+    window.open('/admin', '_blank');
   };
 
   const startVRTour = () => {
@@ -760,6 +799,35 @@ export default function Home() {
                     </div>
                     <div>
                       <Label className={vrMode ? 'text-cyan-200' : 'text-gray-700'}>
+                        Email *
+                      </Label>
+                      <Input
+                        type="email"
+                        required
+                        value={formData.email}
+                        onChange={(e) => setFormData({...formData, email: e.target.value})}
+                        className={vrMode ? 'bg-black/50 border-cyan-500/30 text-white' : ''}
+                        placeholder="seu@email.com"
+                      />
+                    </div>
+                  </div>
+                  
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                      <Label className={vrMode ? 'text-cyan-200' : 'text-gray-700'}>
+                        Telefone *
+                      </Label>
+                      <Input
+                        type="tel"
+                        required
+                        value={formData.telefone}
+                        onChange={(e) => setFormData({...formData, telefone: e.target.value})}
+                        className={vrMode ? 'bg-black/50 border-cyan-500/30 text-white' : ''}
+                        placeholder="(15) 99999-9999"
+                      />
+                    </div>
+                    <div>
+                      <Label className={vrMode ? 'text-cyan-200' : 'text-gray-700'}>
                         Data e Hora da Viagem
                       </Label>
                       <Input
@@ -808,6 +876,7 @@ export default function Home() {
                       </SelectTrigger>
                       <SelectContent className={vrMode ? 'bg-black/80 text-white' : 'bg-white'}>
                         <SelectItem value="executivo">Fretamento Executivo</SelectItem>
+                        <SelectItem value="industrial">Fretamento Industrial</SelectItem>
                         <SelectItem value="turismo">Turismo</SelectItem>
                         <SelectItem value="eventos">Eventos</SelectItem>
                         <SelectItem value="outros">Outros</SelectItem>
@@ -934,6 +1003,42 @@ export default function Home() {
           <div className="absolute -top-1 -right-1 w-3 h-3 bg-green-400 rounded-full animate-ping"></div>
         </a>
       </Button>
+
+      {/* Notificação Toast */}
+      {notification && (
+        <div className={`fixed top-6 right-6 z-50 p-4 rounded-xl shadow-2xl backdrop-blur-xl border transition-all duration-500 transform ${
+          notification.type === 'success' 
+            ? 'bg-green-500/90 border-green-400/50 text-white' 
+            : 'bg-red-500/90 border-red-400/50 text-white'
+        } animate-in slide-in-from-right-full`}>
+          <div className="flex items-center gap-3">
+            <div className={`p-2 rounded-full ${
+              notification.type === 'success' ? 'bg-green-400/30' : 'bg-red-400/30'
+            }`}>
+              {notification.type === 'success' ? (
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                </svg>
+              ) : (
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              )}
+            </div>
+            <div className="flex-1">
+              <p className="font-medium text-sm">{notification.message}</p>
+            </div>
+            <button 
+              onClick={() => setNotification(null)}
+              className="p-1 hover:bg-white/20 rounded-full transition-colors"
+            >
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+          </div>
+        </div>
+      )}
     </>
   );
  }
